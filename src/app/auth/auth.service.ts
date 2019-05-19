@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthLoginInfo} from './login-info';
 import {JwtResponse} from './jwt-response';
 import {SignUpInfo} from './sigup-info';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,8 +15,8 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8080/api/auth/signin';
-  private signupUrl = 'http://localhost:8080/api/auth/signup';
+  private loginUrl = environment.apiUrl + '/auth/signin';
+  private signupUrl = environment.apiUrl + '/auth/signup';
 
   constructor(private http: HttpClient) { }
 
