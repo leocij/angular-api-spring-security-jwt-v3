@@ -1,0 +1,25 @@
+<ng-container *ngIf="users | async as users; else loading">
+  <div class="col-md-3 mb-2" *ngFor="let user of users">
+    <div class="card text-center">
+
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <button class="btn btn-dark" (click)="openUserInfo(user)"><i class="fas fa-info-circle"></i></button>
+        {{ user.name }}
+        <button class="btn btn-danger" (click)="deleteUser(user.id)"><i class="far fa-trash-alt"></i></button>
+      </div>
+
+      <div class="card-body">
+        <p>{{ user.email }}</p>
+      </div>
+
+      <div class="card-footer">
+        <a [routerLink]="['/users/edit', user.id]" class="btn btn-info btn-block">Edit</a>
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <span>Loading users...</span>
+</ng-template>

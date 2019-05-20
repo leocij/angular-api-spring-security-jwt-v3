@@ -12,6 +12,9 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { UsersComponent } from './component/users/users.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { UserInfoComponent } from './component/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
     UserComponent,
     PmComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsersComponent,
+    NavbarComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
