@@ -1,0 +1,38 @@
+<div class="col-md-6">
+  <div class="card">
+
+    <div class="card-header">
+      Add New User
+    </div>
+
+    <div class="card-body">
+      <form>
+        <div class="form-group"><input type="text" class="form-control" name="name" placeholder="Name" [(ngModel)]="user.name" autofocus></div>
+        <div class="form-group"><input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)]="user.username"></div>
+        <div class="form-group"><input type="text" class="form-control" name="email" placeholder="Email" [(ngModel)]="user.email"></div>
+        <div class="form-group"><input type="text" class="form-control" name="password" placeholder="Password" [(ngModel)]="user.password"></div>
+
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="user" [(ngModel)]="userChecked" [ngModelOptions]="{standalone: true}">
+            <label for="user" class="custom-control-label">User</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="pm" [(ngModel)]="pmChecked" [ngModelOptions]="{standalone: true}">
+            <label for="pm" class="custom-control-label">PM</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="admin" [(ngModel)]="adminChecked" [ngModelOptions]="{standalone: true}">
+            <label for="admin" class="custom-control-label">Admin</label>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-success form-group my-2" (click)="editUser ? updateUser() : saveUser()">Commit</button>
+    </div>
+
+  </div>
+</div>

@@ -15,6 +15,10 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { UsersComponent } from './component/users/users.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { UserInfoComponent } from './component/user-info/user-info.component';
+import { UserFormComponent } from './component/user-form/user-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,14 +31,23 @@ import { UserInfoComponent } from './component/user-info/user-info.component';
     RegisterComponent,
     UsersComponent,
     NavbarComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    // npm i ngx-toastr
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+
+    // npm i @ng-bootstrap/ng-bootstrap
+    NgbModule
   ],
+  entryComponents: [ ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

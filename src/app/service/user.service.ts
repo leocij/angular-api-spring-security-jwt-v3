@@ -19,4 +19,12 @@ export class UserService {
         tap(console.log)
       );
   }
+
+  putUser(id: string, user: User) {
+    return this.httpClient.put(`${ environment.apiUrl }/users/${ id }`, user);
+  }
+
+  postUser(user: User) {
+    return this.httpClient.post(`${ environment.apiUrl }/users`, user);
+  }
 }
