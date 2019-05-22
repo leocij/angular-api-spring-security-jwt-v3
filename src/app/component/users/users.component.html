@@ -1,21 +1,27 @@
 <ng-container *ngIf="users | async as users; else loading">
-  <div class="col-md-3 mb-2" *ngFor="let user of users">
-    <div class="card text-center">
+  <div class="row">
+    <div class="col-md-3 mb-4" *ngFor="let user of users">
+      <div class="card text-center">
 
-      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-        <button class="btn btn-dark" (click)="openUserInfo(user)"><i class="fas fa-info-circle"></i></button>
-        {{ user.name }}
-        <button class="btn btn-danger" (click)="deleteUser(user.id)"><i class="far fa-trash-alt"></i></button>
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+          {{ user.name }}
+          <button class="btn btn-danger" (click)="deleteUser(user.id)"><i class="far fa-trash-alt"></i></button>
+        </div>
+
+        <div class="card-body">
+          <p>{{ user.email }}</p>
+          <p>{{ user.username }}</p>
+
+          <div class="border border-right-0 border-left-0 border-bottom-0" *ngIf="user.roles.length !== 0">
+            <h5>{{ user.roles.length === 0 ? "" : user.roles.length === 1 ? "Role" : "Roles" }}</h5>
+          </div>
+          <ng-container *ngFor="let role of user.roles">
+            <p *ngIf="role.name === 'ROLE_USER'">User</p>
+            <p *ngIf="role.name === 'ROLE_PM'">PM</p>
+            <p *ngIf="role.name === 'ROLE_ADMIN'">Admin</p>
+            </ng-container>
+        </div>
       </div>
-
-      <div class="card-body">
-        <p>{{ user.email }}</p>
-      </div>
-
-      <div class="card-footer">
-        <a [routerLink]="['/users/edit', user.id]" class="btn btn-info btn-block">Edit</a>
-      </div>
-
     </div>
   </div>
 </ng-container>

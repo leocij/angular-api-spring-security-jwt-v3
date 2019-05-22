@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../service/user.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Role } from '../../model/role';
+import { TokenStorageService } from '../../auth/token-storage.service';
 
 @Component({
   selector: 'app-user-form',
@@ -13,17 +13,19 @@ import { Role } from '../../model/role';
 })
 export class UserFormComponent implements OnInit {
   user = UserFormComponent.initUser();
-  editUser = false;
   role = {} as Role;
   adminChecked = false;
   pmChecked = false;
-  userChecked = false;
+  userChecked = true;
+  isSignedUp = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
   constructor(
     private modalService: NgbModal,
     private userService: UserService,
-    private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private tokenStorageService: TokenStorageService
   ) { }
 
   private static initUser() {
@@ -37,22 +39,18 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.tokenStorageService.getToken()) {
+      this.router.navigate(['login']);
+    }
   }
 
-  updateUser() {
-    this.userService.putUser(this.user.id, this.user)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.toastr.success('User updated success.');
-        },
-        error => {
-          console.log('Error put: ' + error);
-        }
-      );
+  private addRole(role: string) {
+    this.role.name = role;
+    this.user.roles.push(this.role);
+    this.role = { } as Role;
   }
 
-  saveUser() {
+  onSubmit() {
     delete this.user.id;
 
     if (this.userChecked) {
@@ -70,22 +68,18 @@ export class UserFormComponent implements OnInit {
     this.userService.postUser(this.user)
       .subscribe(
         () => {
-          this.router.navigate(['/users']);
-          this.toastr.success('User commited successfully.');
+          this.isSignedUp = true;
+          this.isSignUpFailed = false;
+          this.user = UserFormComponent.initUser();
+          this.userChecked = false;
+          this.pmChecked = false;
+          this.adminChecked = false;
         },
         error => {
-          console.log(JSON.stringify(error));
+          console.log(error);
+          this.errorMessage = error.error;
+          this.isSignUpFailed = true;
         }
       );
-    this.user = UserFormComponent.initUser();
-    this.userChecked = false;
-    this.pmChecked = false;
-    this.adminChecked = false;
-  }
-
-  private addRole(role: string) {
-    this.role.name = role;
-    this.user.roles.push(this.role);
-    this.role = { } as Role;
   }
 }

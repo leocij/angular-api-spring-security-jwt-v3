@@ -3,7 +3,6 @@ import { TokenStorageService } from '../../auth/token-storage.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../model/user';
-import { UserInfoComponent } from '../user-info/user-info.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../service/user.service';
 
@@ -34,12 +33,11 @@ export class UsersComponent implements OnInit {
     this.users = this.userService.getUsers();
   }
 
-  openUserInfo(user: User) {
-    const modalRef = this.modalService.open(UserInfoComponent);
-    modalRef.componentInstance.user = user;
-  }
-
   deleteUser(id: string) {
-
+    this.userService.deleteUser(id)
+      .subscribe(
+        () => this.getUsers(),
+        error1 => console.log(error1)
+      );
   }
 }
