@@ -14,6 +14,8 @@ import { UserFormComponent } from './component/user-form/user-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TasksComponent } from './component/tasks/tasks.component';
+import { TaskFormComponent } from './component/task-form/task-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterComponent,
     UsersComponent,
     NavbarComponent,
-    UserFormComponent
+    UserFormComponent,
+    TasksComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,
