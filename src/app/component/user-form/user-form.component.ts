@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../service/user.service';
 import { Router } from '@angular/router';
 import { Role } from '../../model/role';
@@ -22,7 +21,6 @@ export class UserFormComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private modalService: NgbModal,
     private userService: UserService,
     private router: Router,
     private tokenStorageService: TokenStorageService

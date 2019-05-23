@@ -19,19 +19,11 @@ export class UserService {
       .pipe();
   }
 
-  putUser(id: string, user: User) {
-    return this.httpClient.put(`${ this.RESOURCE_USERS }/${ id }`, user);
-  }
-
   postUser(user: User) {
     return this.httpClient.post(this.RESOURCE_USERS, user);
   }
 
   deleteUser(id: string) {
     return this.httpClient.delete(`${ this.RESOURCE_USERS }/${ id }`);
-  }
-
-  getUser(id: string) {
-    return this.httpClient.get<User>(`${ this.RESOURCE_USERS }?id=${ id }`).pipe();
   }
 }

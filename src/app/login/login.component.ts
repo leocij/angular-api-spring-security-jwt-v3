@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {AuthService} from '../auth/auth.service';
 import { AuthLoginInfo } from '../auth/login-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,13 +19,15 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
+      this.router.navigate(['tasks']);
     }
   }
 
